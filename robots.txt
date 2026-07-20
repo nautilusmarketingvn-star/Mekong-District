@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://nautilusmarketingvn-star.github.io/Mekong-District/sitemap.xml
