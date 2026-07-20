@@ -3,11 +3,6 @@ const status = document.querySelector('#form-status');
 const submitButton = form?.querySelector('button[type="submit"]');
 const leadEndpoint = 'https://mekong-district-leads.nautilusmarketingvn.workers.dev/lead';
 
-const assetHost = 'https://mekong-district-long-xuyen-land.nautilusmarketingvn.chatgpt.site/';
-document.querySelectorAll('img[src^="assets/"]').forEach((image) => {
-  image.src = assetHost + image.getAttribute('src').replace('assets/', '');
-});
-
 if (form) {
   const honeypot = document.createElement('input');
   honeypot.type = 'text';
