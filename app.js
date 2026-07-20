@@ -1,12 +1,24 @@
 const form = document.querySelector('#lead-form');
 const status = document.querySelector('#form-status');
 const submitButton = form?.querySelector('button[type="submit"]');
-const leadEndpoint = 'https://script.google.com/macros/s/AKfycbw2erIk2a1-NCT-ktCryBxw0UryOmVjB-RnWKeXUiiJHc01ngdNUG2g7kKHfM_AM1H6/exec';
+const leadEndpoint = 'https://mekong-district-leads.nautilusmarketingvn.workers.dev/lead';
 
 const assetHost = 'https://mekong-district-long-xuyen-land.nautilusmarketingvn.chatgpt.site/';
 document.querySelectorAll('img[src^="assets/"]').forEach((image) => {
   image.src = assetHost + image.getAttribute('src').replace('assets/', '');
 });
+
+if (form) {
+  const honeypot = document.createElement('input');
+  honeypot.type = 'text';
+  honeypot.name = 'website';
+  honeypot.tabIndex = -1;
+  honeypot.autocomplete = 'off';
+  honeypot.setAttribute('aria-hidden', 'true');
+  honeypot.style.position = 'absolute';
+  honeypot.style.left = '-10000px';
+  form.append(honeypot);
+}
 
 form?.addEventListener('submit', async (event) => {
   event.preventDefault();
@@ -21,12 +33,13 @@ form?.addEventListener('submit', async (event) => {
   submitButton.disabled = true;
 
   try {
-    await fetch(leadEndpoint, {
+    const response = await fetch(leadEndpoint, {
       method: 'POST',
-      mode: 'no-cors',
-      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ ...data, source: 'Landing page' })
     });
+    const result = await response.json();
+    if (!response.ok || !result.ok) throw new Error(result.message || 'Request failed');
     status.className = 'ok';
     status.textContent = 'Cảm ơn bạn! Thông tin đã được ghi nhận. Đội ngũ Long Xuyên Land sẽ sớm liên hệ.';
     form.reset();
