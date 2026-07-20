@@ -1,6 +1,6 @@
 # Mekong District — Static Website
 
-Complete static export of the Mekong District / Long Xuyên Land landing page. The HTML and JavaScript are self-contained; the original public stylesheet and media are referenced from the source site to preserve visual fidelity.
+Complete static export of the Mekong District / Long Xuyên Land landing page. The stylesheet and all production images are stored in this GitHub repository, so the live website no longer depends on the original source site.
 
 ## Run locally
 
@@ -12,4 +12,4 @@ The project is compatible with GitHub Pages, Netlify, Cloudflare Pages, and any 
 
 ## Form behavior
 
-The lead form validates inputs and shows a local confirmation. Connect the submit handler in `app.js` to your CRM, email service, or form endpoint to collect live submissions.
+The lead form validates inputs and submits through the Cloudflare Worker in `cloudflare-worker/`, which securely forwards valid leads to Google Sheets.
